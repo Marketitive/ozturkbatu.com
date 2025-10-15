@@ -1,0 +1,125 @@
+---
+import { ScrollArea } from '@/components/ui/scroll-area';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+---
+
+<aside class="hidden xl:block fixed left-8 top-1/2 transform -translate-y-1/2 w-64 max-h-[80vh] z-10">
+  <ScrollArea client:load className="h-full">
+    <nav class="space-y-1 px-4 pr-6">
+      <h3 class="text-sm font-semibold mb-4 text-foreground">On This Page</h3>
+      <ul class="space-y-1">
+        {headings.map((heading) => {
+          const marginLeft = `${(heading.depth - 2) * 0.75}rem`;
+          return (
+            <li style={{ marginLeft }}>
+              <a
+                href={`#${heading.slug}`}
+                class="text-sm text-muted-foreground hover:text-foreground transition-all duration-200 block py-1.5 leading-relaxed opacity-60 hover:opacity-100"
+                data-toc-link
+                data-slug={heading.slug}
+              >
+                {heading.text}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  </ScrollArea>
+</aside>
+
+<script>
+  // Smooth scrolling with offset for fixed header
+  function setupSmoothScrolling() {
+    const links = document.querySelectorAll('[data-toc-link]');
+    
+    links.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        const targetId = link.getAttribute('data-slug');
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          // Get actual header height dynamically
+          const header = document.querySelector('header');
+          const headerHeight = header ? header.offsetHeight : 80;
+          const offset = headerHeight + 40; // Extra padding for better positioning
+          
+          // Use setTimeout to ensure DOM is ready
+          setTimeout(() => {
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }, 10);
+        }
+      });
+    });
+  }
+
+  // Active section highlighting
+  function setupTOC() {
+    const links = document.querySelectorAll('[data-toc-link]');
+    const sections = document.querySelectorAll('article h2, article h3, article h4, article h5, article h6');
+
+    if (sections.length === 0 || links.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            links.forEach((link) => {
+              const slug = link.getAttribute('data-slug');
+              if (slug === id) {
+                // Active section - white color, full opacity, bold
+                link.classList.add('text-white', 'font-semibold', 'opacity-100');
+                link.classList.remove('text-muted-foreground', 'opacity-60');
+              } else {
+                // Inactive sections - muted color, reduced opacity
+                link.classList.remove('text-white', 'font-semibold', 'opacity-100');
+                link.classList.add('text-muted-foreground', 'opacity-60');
+              }
+            });
+          }
+        });
+      },
+      {
+        rootMargin: '-120px 0px -66%', // Increased top margin to account for header
+        threshold: 1,
+      }
+    );
+
+    sections.forEach((section) => {
+      if (section.id) {
+        observer.observe(section);
+      }
+    });
+  }
+
+  // Initialize both functions
+  function initializeTOC() {
+    setupSmoothScrolling();
+    setupTOC();
+  }
+
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', initializeTOC);
+
+  // Re-run on Astro page transitions
+  document.addEventListener('astro:after-swap', initializeTOC);
+</script>

@@ -1,0 +1,61 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import TOCSidebar from '@/components/TOCSidebar.astro';
+import { Separator } from '@/components/ui/separator';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    pubDate: string;
+    author?: string;
+    tags?: string[];
+  };
+  headings?: Array<{
+    depth: number;
+    slug: string;
+    text: string;
+  }>;
+}
+
+const { frontmatter, headings = [] } = Astro.props;
+const formattedDate = new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={`${frontmatter.title} - Batuhan Ozturk`} description={frontmatter.description}>
+  <!-- TOC Sidebar (Fixed Left) -->
+  {headings.length > 0 && <TOCSidebar headings={headings} />}
+
+  <!-- Main Content (With Left Margin for Sidebar) -->
+  <article class="xl:ml-80 max-w-3xl mx-auto px-6">
+    <div class="prose prose-neutral dark:prose-invert max-w-none">
+      <slot />
+    </div>
+
+    <Separator client:load className="my-12" />
+
+    <footer>
+      <a href="/blog" class="text-accent hover:underline inline-flex items-center gap-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m12 19-7-7 7-7" />
+          <path d="M19 12H5" />
+        </svg>
+        Back to all posts
+      </a>
+    </footer>
+  </article>
+</BaseLayout>
