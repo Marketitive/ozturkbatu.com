@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: Marketitive/ozturkbatu.com
   branch: main
 
 # Publish mode: editorial workflow with drafts
