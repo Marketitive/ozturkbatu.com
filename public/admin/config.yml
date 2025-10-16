@@ -1,0 +1,45 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Publish mode: editorial workflow with drafts
+publish_mode: editorial_workflow
+
+# Media files configuration
+media_folder: "public/images/blog"
+public_folder: "/images/blog"
+
+# Collections
+collections:
+  # Blog posts
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Publish Date", name: "pubDate", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Author", name: "author", widget: "string", default: "Batuhan Ozturk" }
+      - { 
+          label: "Tags", 
+          name: "tags", 
+          widget: "list",
+          default: ["marketing"]
+        }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false, required: false }
+      - { label: "Featured Image", name: "heroImage", widget: "image", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # Pages
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "About Page"
+        name: "about"
+        file: "src/pages/about.astro"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+
