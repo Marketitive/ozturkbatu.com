@@ -11,6 +11,14 @@ const latestPosts = allPosts
 ---
 
 <BaseLayout hideHeader={true} hideFooter={false}>
+  <!-- Hidden form for Netlify detection - DO NOT REMOVE -->
+  <form name="newsletter" method="POST" action="/newsletter-success" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="newsletter" />
+    <input type="hidden" name="bot-field" />
+    <input type="email" name="email" />
+    <button type="submit">Subscribe</button>
+  </form>
+
   <div>
     <!-- Bento Grid - 3 rows x 4 columns -->
     <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[200px]">
