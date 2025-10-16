@@ -3,9 +3,6 @@ backend:
   repo: Marketitive/ozturkbatu.com
   branch: main
 
-# Publish mode: editorial workflow with drafts
-publish_mode: editorial_workflow
-
 # Media files configuration
 media_folder: "public/images/blog"
 public_folder: "/images/blog"
@@ -18,29 +15,21 @@ collections:
     folder: "src/content/blog"
     create: true
     slug: "{{slug}}"
+    extension: "mdx"
+    format: "frontmatter"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
-      - { label: "Publish Date", name: "pubDate", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Publish Date", name: "pubDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
       - { label: "Author", name: "author", widget: "string", default: "Batuhan Ozturk" }
       - { 
           label: "Tags", 
           name: "tags", 
           widget: "list",
-          default: ["marketing"]
+          default: ["marketing"],
+          allow_add: true
         }
       - { label: "Draft", name: "draft", widget: "boolean", default: false, required: false }
       - { label: "Featured Image", name: "heroImage", widget: "image", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
-
-  # Pages
-  - name: "pages"
-    label: "Pages"
-    files:
-      - label: "About Page"
-        name: "about"
-        file: "src/pages/about.astro"
-        fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Body", name: "body", widget: "markdown" }
 
