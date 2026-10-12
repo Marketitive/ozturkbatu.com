@@ -7,7 +7,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Simplified bento: 1 column on phones, 2 on tablets, 4 on desktop -->
     <section class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 auto-rows-[minmax(140px,auto)] lg:auto-rows-[200px]">
       <!-- Photo -->
-      <a href="/about" class="col-span-2 lg:col-span-1 lg:row-span-2 aspect-[4/3] lg:aspect-auto relative overflow-hidden bg-card rounded-lg group">
+      <a href="/about" class="col-span-2 lg:col-span-1 lg:row-span-2 aspect-[4/3] lg:aspect-auto relative overflow-hidden bg-card ring-1 ring-white/10 rounded-lg group">
         <img
           src="/profile.jpeg"
           alt="Batuhan Öztürk"
@@ -17,7 +17,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </a>
 
       <!-- Intro -->
-      <div class="col-span-2 lg:col-span-2 lg:row-span-2 bg-card rounded-lg p-6 md:p-8 flex flex-col justify-center">
+      <div class="col-span-2 lg:col-span-2 lg:row-span-2 bg-card ring-1 ring-white/10 rounded-lg p-6 md:p-8 flex flex-col justify-center">
         <img src="/beyaz.png" alt="" class="w-14 h-14 object-contain mb-4" />
         <h1 class="text-2xl md:text-3xl font-bold text-foreground mb-1">Batuhan Öztürk</h1>
         <p class="text-accent font-medium mb-4">AI & RevOps Architect</p>
@@ -27,19 +27,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <!-- Projects -->
-      <a href="/projects" class="col-span-1 lg:row-span-2 bg-card rounded-lg p-6 flex flex-col items-center justify-center text-center group transition-all">
+      <a href="/projects" class="col-span-1 lg:row-span-2 bg-card ring-1 ring-white/10 rounded-lg p-6 flex flex-col items-center justify-center text-center group transition-all">
         <span class="text-lg font-semibold text-foreground group-hover:text-accent transition-colors">Projects</span>
         <span class="text-sm text-muted-foreground mt-2">Things I've built →</span>
       </a>
 
       <!-- About -->
-      <a href="/about" class="col-span-1 lg:col-span-2 bg-card rounded-lg p-6 flex flex-col items-center justify-center text-center group transition-all">
+      <a href="/about" class="col-span-1 lg:col-span-2 bg-card ring-1 ring-white/10 rounded-lg p-6 flex flex-col items-center justify-center text-center group transition-all">
         <span class="text-lg font-semibold text-foreground group-hover:text-accent transition-colors">About</span>
         <span class="text-sm text-muted-foreground mt-2">Background & thesis →</span>
       </a>
 
       <!-- CV / Career -->
-      <a href="https://www.linkedin.com/in/ozturkbatu/" target="_blank" rel="noopener noreferrer" class="col-span-2 lg:col-span-1 bg-card rounded-lg p-6 flex flex-col items-center justify-center text-center group transition-all">
+      <a href="https://www.linkedin.com/in/ozturkbatu/" target="_blank" rel="noopener noreferrer" class="col-span-2 lg:col-span-1 bg-card ring-1 ring-white/10 rounded-lg p-6 flex flex-col items-center justify-center text-center group transition-all">
         <span class="text-lg font-semibold text-foreground group-hover:text-accent transition-colors">CV / Career</span>
         <span class="text-sm text-muted-foreground mt-2">LinkedIn ↗</span>
       </a>
