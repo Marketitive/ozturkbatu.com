@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+import { getCollection } from 'astro:content';
 
 interface Props {
   title?: string;
@@ -15,6 +16,9 @@ const {
   hideHeader = false,
   hideFooter = false
 } = Astro.props;
+
+const hasPosts = (await getCollection('blog')).some((post) => !post.data.draft);
+const canonical = new URL(Astro.url.pathname, 'https://www.ozturkbatu.com').href;
 ---
 
 <!doctype html>
@@ -26,6 +30,13 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://www.ozturkbatu.com/profile.jpeg" />
+    <meta name="twitter:card" content="summary" />
     
     <!-- Google Analytics 4 -->
     <GoogleAnalytics />
@@ -43,8 +54,13 @@ const {
                 <a href="/" class="text-muted-foreground hover:text-foreground transition-colors">
                   Home
                 </a>
-                <a href="/blog" class="text-muted-foreground hover:text-foreground transition-colors">
-                  Blog
+                {hasPosts && (
+                  <a href="/blog" class="text-muted-foreground hover:text-foreground transition-colors">
+                    Blog
+                  </a>
+                )}
+                <a href="/projects" class="text-muted-foreground hover:text-foreground transition-colors">
+                  Projects
                 </a>
                 <a href="/about" class="text-muted-foreground hover:text-foreground transition-colors">
                   About

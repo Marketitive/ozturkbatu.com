@@ -25,7 +25,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <p class="text-muted-foreground mb-4">
           <strong class="text-foreground">How do we collect your data?</strong><br />
-          Your data is collected when you provide it to us (e.g., newsletter subscription). Other data is collected automatically by our IT systems 
+          Your data is collected when you provide it to us (e.g., when you email us). Other data is collected automatically by our IT systems 
           when you visit the website. This is mainly technical data (e.g., internet browser, operating system, or time of page view).
         </p>
 
@@ -62,14 +62,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <section class="mb-8">
         <h2 class="text-2xl font-semibold text-foreground mb-4">3. Hosting</h2>
         <p class="text-muted-foreground mb-4">
-          This website is hosted by Netlify. The personal data collected on this website is stored on Netlify's servers. 
-          This may include IP addresses, contact requests, metadata and communication data, website accesses, 
-          and other data generated through a website.
+          This website is hosted by Cloudflare, Inc. (101 Townsend St, San Francisco, CA 94107, USA) using Cloudflare Workers. 
+          When you visit the site, Cloudflare processes technical connection data such as your IP address, request metadata and 
+          timestamps in order to deliver the site and protect it against abuse. Data may be processed outside the EU; Cloudflare relies on 
+          the EU-US Data Privacy Framework and standard contractual clauses.
         </p>
         <p class="text-muted-foreground mb-4">
-          External hosting is carried out for the purpose of secure, fast, and efficient provision of our online services by a professional provider 
-          (Art. 6 para. 1 lit. f GDPR). You can find Netlify's privacy policy at: 
-          <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">https://www.netlify.com/privacy/</a>
+          Hosting is carried out for the purpose of secure, fast and efficient provision of our online services (Art. 6 para. 1 lit. f GDPR). 
+          You can find Cloudflare's privacy policy at: 
+          <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">https://www.cloudflare.com/privacypolicy/</a>
         </p>
       </section>
 
@@ -94,24 +95,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           The website operator has a legitimate interest in the technically error-free presentation and optimization of their website.
         </p>
 
-        <h3 class="text-xl font-semibold text-foreground mb-3 mt-6">Newsletter Subscription</h3>
-        <p class="text-muted-foreground mb-4">
-          If you subscribe to our newsletter through the popup form on this website, we collect your email address. This data is processed based on 
-          your consent (Art. 6 para. 1 lit. a GDPR). You can revoke this consent at any time by unsubscribing from the newsletter.
-        </p>
-        <p class="text-muted-foreground mb-4">
-          <strong class="text-foreground">Data we collect:</strong>
-        </p>
-        <ul class="list-disc list-inside text-muted-foreground mb-4 space-y-1">
-          <li>Email address</li>
-          <li>Subscription timestamp</li>
-          <li>IP address (for verification purposes)</li>
-        </ul>
-        <p class="text-muted-foreground">
-          Your email address will be stored until you unsubscribe from the newsletter. You can unsubscribe at any time using the link provided 
-          in each newsletter email or by contacting us directly.
-        </p>
-
         <h3 class="text-xl font-semibold text-foreground mb-3 mt-6">Contact via Email</h3>
         <p class="text-muted-foreground mb-4">
           If you contact us via email, we will store your email address and the content of your message to respond to your inquiry. 
@@ -125,10 +108,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <section class="mb-8">
         <h2 class="text-2xl font-semibold text-foreground mb-4">5. Cookies and Analytics</h2>
         
-        <h3 class="text-xl font-semibold text-foreground mb-3 mt-6">Essential Cookies</h3>
+        <h3 class="text-xl font-semibold text-foreground mb-3 mt-6">Local Storage</h3>
         <p class="text-muted-foreground mb-4">
-          This website uses essential cookies that are necessary for the website to function properly. These cookies are set based on 
-          Art. 6 para. 1 lit. f GDPR (legitimate interest in website functionality).
+          This website stores your analytics choice (accepted or declined) in your browser's local storage so that the banner is not shown again. 
+          This is strictly necessary to honor your decision (§ 25 para. 2 no. 2 TDDDG).
         </p>
 
         <h3 class="text-xl font-semibold text-foreground mb-3 mt-6">Google Analytics 4</h3>
@@ -146,8 +129,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         
         <p class="text-muted-foreground mb-4">
           <strong class="text-foreground">Legal Basis:</strong><br />
-          The use of Google Analytics is based on Art. 6 para. 1 lit. f GDPR (legitimate interest). Our legitimate interest lies in 
-          analyzing website usage to optimize our content and user experience.
+          Google Analytics is only loaded after you give consent through the banner shown on your first visit (Art. 6 para. 1 lit. a GDPR 
+          and § 25 para. 1 TDDDG). If you decline, no Google Analytics script is loaded and no analytics cookies are set.
         </p>
         
         <p class="text-muted-foreground mb-4">
@@ -169,9 +152,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </p>
         
         <p class="text-muted-foreground mb-4">
-          Alternatively, you can prevent Google Analytics from collecting your data by clicking this link: 
-          <a href="#" onclick="alert('Google Analytics has been deactivated'); return false;" class="text-accent hover:underline">Deactivate Google Analytics</a>. 
-          This will place an opt-out cookie that prevents the future collection of your data when visiting this website.
+          You can withdraw or change your consent at any time for the future: 
+          <a href="#" onclick="window.resetAnalyticsConsent(); return false;" class="text-accent hover:underline">Change analytics consent</a>.
         </p>
         
         <p class="text-muted-foreground">
@@ -236,7 +218,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           and updating the "Last Updated" date. You are advised to review this privacy policy periodically for any changes.
         </p>
         <p class="text-muted-foreground mt-4">
-          <strong class="text-foreground">Last Updated:</strong> January 2025
+          <strong class="text-foreground">Last Updated:</strong> October 2026
         </p>
       </section>
 
