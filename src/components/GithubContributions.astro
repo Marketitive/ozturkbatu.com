@@ -4,17 +4,42 @@ const colors = ['bg-white/10', 'bg-green-900/70', 'bg-green-700/70', 'bg-green-5
 const updated = new Date(data.generatedAt).toISOString().slice(0, 10);
 ---
 
-<section class="mb-12">
+<section class="mb-12" id="gh-contrib">
   <div class="flex items-baseline justify-between mb-3">
     <h2 class="text-xl font-bold text-foreground">GitHub activity</h2>
-    <p class="text-xs text-muted-foreground">{data.total} contributions in the last year</p>
+    <p class="text-xs text-muted-foreground"><span id="gh-total">{data.total}</span> contributions in the last year</p>
   </div>
   <div class="bg-card rounded-lg p-3 sm:p-4">
-    <div class="grid grid-flow-col grid-rows-7 gap-[2px] sm:gap-[3px]" style={`grid-template-columns: repeat(${data.weeks.length}, minmax(0, 1fr));`}>
+    <div id="gh-grid" class="grid grid-flow-col grid-rows-7 gap-[2px] sm:gap-[3px]" style={`grid-template-columns: repeat(${data.weeks.length}, minmax(0, 1fr));`}>
       {data.weeks.flatMap((week) => week).map((day) => (
         <div class={`aspect-square rounded-[2px] ${colors[day.level]}`} title={`${day.date}: ${day.count}`}></div>
       ))}
     </div>
   </div>
-  <p class="text-xs text-muted-foreground mt-2">Includes work in private repositories (counts only). Snapshot of {updated}.</p>
+  <p class="text-xs text-muted-foreground mt-2">Includes work in private repositories (counts only). Updated <span id="gh-updated">{updated}</span>.</p>
 </section>
+
+<script is:inline>
+  (function () {
+    var colors = ['bg-white/10', 'bg-green-900/70', 'bg-green-700/70', 'bg-green-500/70', 'bg-green-300'];
+    fetch('/api/contributions')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.weeks) return;
+        var grid = document.getElementById('gh-grid');
+        grid.style.gridTemplateColumns = 'repeat(' + d.weeks.length + ', minmax(0, 1fr))';
+        grid.innerHTML = '';
+        d.weeks.forEach(function (week) {
+          week.forEach(function (day) {
+            var el = document.createElement('div');
+            el.className = 'aspect-square rounded-[2px] ' + colors[day.level];
+            el.title = day.date + ': ' + day.count;
+            grid.appendChild(el);
+          });
+        });
+        document.getElementById('gh-total').textContent = d.total;
+        document.getElementById('gh-updated').textContent = String(d.generatedAt).slice(0, 10);
+      })
+      .catch(function () {});
+  })();
+</script>
