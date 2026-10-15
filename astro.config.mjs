@@ -10,6 +10,10 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.ozturkbatu.com',
+  redirects: {
+    '/about': '/#about',
+    '/projects': '/#projects',
+  },
   integrations: [
     expressiveCode({
       themes: ['github-dark', 'github-light'],

@@ -1,0 +1,43 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource/instrument-serif';
+import '@fontsource/caveat';
+import '../styles/story.css';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+
+interface Props { title?: string; description?: string }
+const {
+  title = 'Batuhan Öztürk — AI & RevOps Architect',
+  description = 'AI & RevOps Architect building the data infrastructure that lets AI results compound instead of evaporating after a demo.',
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, 'https://www.ozturkbatu.com').href;
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://www.ozturkbatu.com/profile.jpeg" />
+    <meta name="twitter:card" content="summary" />
+    <title>{title}</title>
+    <script is:inline>
+      document.documentElement.classList.add('js');
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
+    <GoogleAnalytics />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
