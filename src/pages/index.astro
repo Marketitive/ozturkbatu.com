@@ -36,6 +36,12 @@ const heroHtml = heroLines.map(ann);
 
 const projects = [
   {
+    img: 'medzeka.jpg', title: 'Medzeka', rot: 3,
+    left: "Reporting for private clinics that does not guess. A supervisor agent hands research to a specialist agent, and every number in a report is checked against the clinic's data before anyone sees it.",
+    right: "Pseudonymized clinic data feeds KPIs, a no-show risk model and revenue and volume forecasts, then charts and a written report that is blocked if its figures do not reconcile. Demonstrated on a synthetic dermatology clinic.",
+    stack: ['Python', 'Deep Agents', 'Postgres', 'Qdrant'],
+  },
+  {
     img: '20horizon.jpg', title: '20Horizon', rot: -4,
     left: "A walkable 3D gallery that proves attribution, not just aesthetics. Built to test whether one shared gallery can drive attributable traffic to individual artists' portfolios, without a SaaS platform or a game engine.",
     right: "A Next.js and React Three Fiber room with click-to-move and focus-zoom. Every portfolio click routes through a server redirect that logs it, filters bots and dedupes repeat visits.",
@@ -54,7 +60,7 @@ const projects = [
     stack: ['React', 'TipTap', 'FastAPI', 'LangChain'],
   },
   {
-    img: 'deeplocate.svg', title: 'DeepLocate', rot: 4,
+    img: 'deeplocate.jpg', title: 'DeepLocate', rot: 4,
     left: "Exhaustive local business data, past the 20-result wall every mapping API hits.",
     right: "Quad-tree decomposition recursively splits an area until every cell is under the cap, so each business is captured exactly once. Runs as a CLI or a live map that visualizes the subdivision.",
     stack: ['Python', 'FastAPI', 'Leaflet', 'Pandas'],
