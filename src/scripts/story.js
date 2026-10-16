@@ -48,12 +48,6 @@ function make(el, animate) {
   return a;
 }
 
-function reveal(entry, animate) {
-  entry.shown = true;
-  entry.a = make(entry.el, animate);
-  if (entry.fix) setTimeout(() => entry.fix.classList.add('show'), animate ? 650 : 0);
-}
-
 function rebuildShownAnnotations() {
   items.forEach((entry) => {
     if (!entry.shown) return;
@@ -62,24 +56,82 @@ function rebuildShownAnnotations() {
   });
 }
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const nextFrame = () => new Promise((r) => requestAnimationFrame(r));
+
+/* wrap every word of a paragraph so lines can be revealed one by one */
+function splitWords(par) {
+  const walker = document.createTreeWalker(par, NodeFilter.SHOW_TEXT, {
+    acceptNode: (n) => (n.parentElement.closest('ins.fix') || !n.nodeValue.trim() ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT),
+  });
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach((node) => {
+    const frag = document.createDocumentFragment();
+    node.nodeValue.split(/(\s+)/).forEach((part) => {
+      if (!part) return;
+      if (/^\s+$/.test(part)) { frag.append(part); return; }
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.textContent = part;
+      frag.append(w);
+    });
+    node.replaceWith(frag);
+  });
+}
+
+async function drawAnnotation(entry) {
+  entry.shown = true;
+  entry.a = make(entry.el, true);
+  await sleep(750);
+  if (entry.fix) {
+    entry.fix.style.maxWidth = entry.fix.scrollWidth + 'px';
+    entry.fix.classList.add('show');
+    await sleep(700);
+  }
+}
+
+async function waitUntilVisible(el) {
+  while (el.getBoundingClientRect().top > window.innerHeight * 0.88) await sleep(80);
+}
+
+/* each paragraph plays line by line; lines are measured live so corrections that widen a line reflow correctly */
+async function playParagraph(par) {
+  const words = [...par.querySelectorAll('.w')];
+  const anns = items.filter((i) => par.contains(i.el));
+  let idx = 0;
+  while (idx < words.length) {
+    await waitUntilVisible(words[idx]);
+    const top = words[idx].getBoundingClientRect().top;
+    const tol = parseFloat(getComputedStyle(par).lineHeight) / 2 || 14;
+    const line = [];
+    while (idx < words.length && Math.abs(words[idx].getBoundingClientRect().top - top) < tol) line.push(words[idx++]);
+    line.forEach((w, k) => setTimeout(() => w.classList.add('in'), k * 35));
+    await sleep(line.length * 35 + 450);
+    for (const entry of anns) {
+      if (entry.shown) continue;
+      const last = [...entry.el.querySelectorAll('.w')].pop();
+      if (last && line.includes(last)) await drawAnnotation(entry);
+    }
+    await nextFrame();
+  }
+}
+
 document.querySelectorAll('.ann').forEach((el) => {
   const next = el.nextElementSibling;
   items.push({ el, shown: false, a: null, fix: next && next.classList.contains('fix') ? next : null });
 });
 
-document.querySelectorAll('.sent').forEach((sent) => {
-  const mine = items.filter((i) => sent.contains(i.el));
-  const play = () => {
-    sent.classList.add('in');
-    mine.forEach((entry, k) => {
-      if (entry.shown) return;
-      if (reduced) reveal(entry, false);
-      else setTimeout(() => reveal(entry, true), 500 + k * 350);
-    });
-  };
-  if (reduced) { play(); return; }
-  ScrollTrigger.create({ trigger: sent, start: 'top 82%', once: true, onEnter: play });
-});
+const paras = [...document.querySelectorAll('.para')];
+paras.forEach(splitWords);
+if (reduced) {
+  document.querySelectorAll('.w').forEach((w) => w.classList.add('in'));
+  items.forEach((entry) => { entry.shown = true; entry.a = make(entry.el, false); });
+} else {
+  (async () => {
+    for (const par of paras) await playParagraph(par);
+  })();
+}
 
 /* Projects: polaroids land and stack while the section is pinned (desktop only) */
 const mm = gsap.matchMedia();
@@ -94,7 +146,7 @@ mm.add('(min-width: 769px) and (prefers-reduced-motion: no-preference)', () => {
   });
 
   const tl = gsap.timeline({
-    scrollTrigger: { trigger: stage, start: 'top top', end: `+=${projects.length * 90}%`, pin: true, scrub: 0.6 },
+    scrollTrigger: { trigger: document.getElementById('projects'), start: 'top top', end: `+=${projects.length * 90}%`, pin: true, scrub: 0.6 },
   });
   projects.forEach((p, i) => {
     const pol = p.querySelector('.polaroid');

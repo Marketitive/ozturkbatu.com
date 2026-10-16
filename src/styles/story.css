@@ -80,7 +80,7 @@ img { max-width: 100%; display: block; }
 }
 .hero-grid {
   width: min(1200px, 100%); display: grid; align-items: center; gap: 2rem;
-  grid-template-columns: 1fr minmax(220px, 340px) 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 .hero h1, .hero .role {
   font-family: var(--font-display); font-weight: 400; margin: 0;
@@ -88,8 +88,6 @@ img { max-width: 100%; display: block; }
 }
 .hero h1 { text-align: right; }
 .hero .role { color: var(--muted); }
-.hero-slot { aspect-ratio: 3 / 4; border-radius: 999px 999px 24px 24px; overflow: hidden; background: var(--line); }
-.hero-slot img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: grayscale(1); }
 .scroll-hint { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); color: var(--muted); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
 .hero { position: relative; }
 
@@ -100,9 +98,9 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem);
   line-height: 1.45; margin: 0 0 2.2rem;
 }
-.sent { isolation: isolate; }
-.js .sent { opacity: 0; transform: translateY(10px); transition: opacity 0.7s, transform 0.7s; }
-.js .sent.in { opacity: 1; transform: none; }
+.w { display: inline-block; }
+.js .w { opacity: 0; transform: translateY(8px); transition: opacity 0.6s, transform 0.6s; }
+.js .w.in { opacity: 1; transform: none; }
 .ann { position: relative; display: inline; }
 del { text-decoration: none; }
 html:not(.js) del { text-decoration: line-through; }
@@ -110,11 +108,16 @@ ins.fix {
   font-family: var(--font-hand); text-decoration: none; color: var(--ann-pen);
   font-size: 1.15em; margin-left: 0.3em;
 }
-.js ins.fix { opacity: 0; transition: opacity 0.4s; }
-.js ins.fix.show { opacity: 1; }
+/* correction takes no space until written, then grows so the line reflows */
+.js ins.fix {
+  display: inline-block; overflow: clip; white-space: nowrap; vertical-align: baseline;
+  max-width: 0; margin-left: 0; padding-block: 0.2em; margin-block: -0.2em;
+  transition: max-width 0.6s ease-out, margin-left 0.6s ease-out;
+}
+.js ins.fix.show { margin-left: 0.3em; }
 
 /* Heatmap */
-.gh { margin-top: 4rem; }
+.gh { margin-top: 2.5rem; }
 .gh-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.6rem; font-size: 0.85rem; color: var(--muted); }
 .gh-head h2 { margin: 0; font: 400 1.4rem var(--font-display); color: var(--fg); }
 .gh-grid { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 1fr); gap: 2px; }
@@ -124,14 +127,14 @@ ins.fix {
 .gh-note { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; }
 
 /* Projects */
-.projects { padding: 8vh 0; }
+.projects { padding: 12vh 0 8vh; }
 .projects h2.section-title, .contact h2.section-title {
   font: 400 clamp(2.2rem, 5vw, 4rem) var(--font-display); margin: 0 0 2rem;
 }
 .stage {
   display: grid; align-items: center; gap: 2rem;
   grid-template-columns: 1fr minmax(260px, 400px) 1fr;
-  min-height: 100svh; padding-block: 5rem 2rem;
+  min-height: calc(100svh - 14rem); padding-block: 1rem 2rem;
 }
 .project { display: contents; }
 .project .txt-l { grid-row: 1; grid-column: 1; text-align: right; }
@@ -154,7 +157,6 @@ ins.fix {
 @media (max-width: 768px) {
   .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 1.2rem; }
   .hero h1 { text-align: center; }
-  .hero-slot { width: min(60vw, 260px); margin-inline: auto; order: -1; }
   .stage { display: block; min-height: 0; padding-top: 2rem; }
   .project { display: block; margin-bottom: 4rem; }
   .project .txt-l, .project .txt-r { text-align: left; margin-top: 1rem; }
@@ -169,7 +171,8 @@ ins.fix {
 .contact-img { aspect-ratio: 3 / 4; overflow: hidden; border-radius: 6px; }
 .contact-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: grayscale(1); transition: filter 0.4s; }
 .contact-img:hover img { filter: none; }
-.contact .lead { color: var(--muted); margin: 0 0 1.2rem; }
+.cv-btn { display: inline-block; margin: 1.4rem 0 0; padding: 0.7rem 1.4rem; border: 1px solid var(--fg); border-radius: 999px; text-decoration: none; font-size: 0.95rem; transition: background 0.2s, color 0.2s; }
+.cv-btn:hover { background: var(--fg); color: var(--bg); }
 .contact .mail {
   display: block; font: 400 clamp(1.5rem, 3.2vw, 2.8rem) var(--font-display);
   text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 0.4rem; margin-bottom: 1.6rem; overflow-wrap: anywhere;
@@ -193,5 +196,6 @@ ins.fix {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   #preloader { display: none; }
-  .js .sent, .js ins.fix { opacity: 1; transform: none; transition: none; }
+  .js .w { opacity: 1; transform: none; transition: none; }
+  .js ins.fix { max-width: none; margin-left: 0.3em; transition: none; }
 }

@@ -5,7 +5,7 @@ import GithubContributions from '../components/GithubContributions.astro';
 // About copy. Markup: {hl:text} highlight, {ul:text} underline, {ci:text} circle,
 // {x:wrong|right} strike the wrong word and write the correction.
 const about = [
-  "I'm Batuhan. I build the {ul:data infrastructure} that lets AI results {hl:compound} instead of evaporating after a demo.",
+  "I'm Batu. I build the {ul:data infrastructure} that lets AI results {hl:compound} instead of evaporating after a demo.",
   "Most AI investment goes into models, tools and frameworks, the visible layer. The bottleneck is {x:the model|the data}. Without a structured foundation, AI output is inconsistent, and value disappears when a session ends instead of compounding.",
   "Closing that gap is the actual work: data architecture and pipelines that connect business systems to AI in a durable, {ul:auditable} way, so results persist and scale.",
   "At {hl:AI.GROUP} I work on automation and AI initiatives across the group's portfolio companies, from early diagnostics to production systems. One example is an autonomous deal-flow pipeline for {hl:AI.FUND} that ingests pitch decks, researches the companies and drafts investment notes without manual handoffs.",
@@ -23,11 +23,11 @@ const ann = (s: string) =>
     }
     return `<span class="ann" data-ann="${kind}">${body}</span>`;
   });
-const paragraphs = about.map((p) => p.split(/(?<=[.!?])\s+/).map(ann));
+const paragraphs = about.map(ann);
 
 const projects = [
   {
-    slug: 'gallerymvp', title: 'GalleryMVP', rot: -4,
+    slug: 'gallerymvp', title: '20Horizon', rot: -4,
     left: "A walkable 3D gallery that proves attribution, not just aesthetics. Built to test whether one shared gallery can drive attributable traffic to individual artists' portfolios, without a SaaS platform or a game engine.",
     right: "A Next.js and React Three Fiber room with click-to-move and focus-zoom. Every portfolio click routes through a server redirect that logs it, filters bots and dedupes repeat visits.",
     stack: ['Next.js', 'React Three Fiber', 'TypeScript', 'SQLite'],
@@ -77,11 +77,10 @@ const projects = [
   </header>
 
   <main id="top">
-    <!-- HERO SLOT: placeholder portrait; replaced by the 3D bust in Phase 2 -->
+    <!-- HERO SLOT: the 3D bust goes between the greeting and the role in Phase 2 -->
     <section class="hero">
       <div class="hero-grid">
-        <h1>Hi, I'm Batuhan.</h1>
-        <div class="hero-slot"><img src="/profile.jpeg" alt="Batuhan Öztürk" /></div>
+        <h1>Hi, I'm Batu.</h1>
         <p class="role">AI &amp; RevOps Architect.</p>
       </div>
       <span class="scroll-hint">Scroll</span>
@@ -89,14 +88,7 @@ const projects = [
 
     <section class="about" id="about">
       <div class="wrap">
-        {paragraphs.map((sentences) => (
-          <p>
-            {sentences.map((s, i) => (
-              <Fragment><span class="sent" set:html={s + (i < sentences.length - 1 ? ' ' : '')} /></Fragment>
-            ))}
-          </p>
-        ))}
-        <GithubContributions />
+        {paragraphs.map((html) => <p class="para" set:html={html} />)}
       </div>
     </section>
 
@@ -130,13 +122,14 @@ const projects = [
           <div class="contact-img"><img src="/profile.jpeg" alt="Batuhan Öztürk surfing in a suit" loading="lazy" /></div>
           <div>
             <h2 class="section-title">Let's talk.</h2>
-            <p class="lead">Open to roles and good conversations.</p>
             <a class="mail" href="mailto:ozturkbatu@gmail.com">ozturkbatu@gmail.com</a>
             <div class="links">
               <a href="https://www.linkedin.com/in/ozturkbatu/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
               <a href="https://x.com/ozturkbatu_" target="_blank" rel="noopener noreferrer">X ↗</a>
               <a href="https://github.com/ozturkbatu" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
             </div>
+            <a class="cv-btn" href="/cv.pdf" download>Download CV ↓</a>
+            <GithubContributions />
           </div>
         </div>
       </div>
@@ -144,12 +137,11 @@ const projects = [
   </main>
 
   <footer class="site-footer">
-    <h2 class="big-name">Batuhan Öztürk</h2>
     <img class="big-sig" src="/signature.png" alt="" loading="lazy" />
     <div class="legal">
       <a href="/impressum">Imprint</a>
       <a href="/datenschutz">Privacy</a>
-      <span>&copy; {new Date().getFullYear()} Batuhan Öztürk</span>
+      <span>&copy; {new Date().getFullYear()}</span>
     </div>
   </footer>
 
