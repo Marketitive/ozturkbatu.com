@@ -80,13 +80,13 @@ img { max-width: 100%; display: block; }
 }
 .hero-grid {
   width: min(1200px, 100%); display: grid; align-items: center; gap: 2rem;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 0.4rem;
 }
 .hero h1, .hero .role {
   font-family: var(--font-display); font-weight: 400; margin: 0;
   font-size: clamp(2rem, 5.2vw, 4.4rem); line-height: 1.05;
 }
-.hero h1 { text-align: right; }
+.hero h1 { text-align: center; }
 .hero .role { color: var(--muted); }
 .scroll-hint { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); color: var(--muted); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
 .hero { position: relative; }
