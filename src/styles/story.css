@@ -199,3 +199,28 @@ ins.fix {
   .js .hero-line { opacity: 1; }
   
 }
+
+/* Blog */
+.wrap.narrow { width: min(760px, 100% - 2rem); }
+.subpage { padding: 9rem 0 6rem; min-height: 80svh; }
+.subpage h1.section-title, .blog h2.section-title { font: 400 clamp(2.2rem, 5vw, 4rem) var(--font-display); margin: 0 0 2rem; line-height: 1.1; }
+.blog { padding: 10vh 0 4vh; }
+.posts-empty { color: var(--muted); }
+.post-list { list-style: none; margin: 0; padding: 0; }
+.post-list li { border-top: 1px solid var(--line); }
+.post-list li:last-child { border-bottom: 1px solid var(--line); }
+.post-list a { display: block; padding: 1.4rem 0; text-decoration: none; }
+.post-list time, .post > time { font-size: 0.8rem; color: var(--muted); }
+.post-list h3 { font: 400 1.7rem var(--font-display); margin: 0.2rem 0 0.3rem; transition: color 0.2s; }
+.post-list a:hover h3 { color: var(--ann-pen); }
+.post-list p { margin: 0; color: var(--muted); }
+.all-posts, .post .back { display: inline-block; margin-top: 1.4rem; color: var(--muted); text-decoration: none; }
+.all-posts:hover, .post .back:hover { color: var(--fg); }
+.post-body { font-size: 1.08rem; line-height: 1.75; }
+.post-body h2 { font: 400 2rem var(--font-display); margin: 2.4rem 0 0.8rem; }
+.post-body h3 { font: 400 1.5rem var(--font-display); margin: 2rem 0 0.6rem; }
+.post-body a { text-decoration: underline; text-underline-offset: 3px; }
+.post-body blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 2px solid var(--ann-pen); color: var(--muted); }
+.post-body img { border-radius: 4px; margin: 1.5rem 0; }
+.post-body code { font-size: 0.9em; }
+.post .back { margin-top: 3rem; }
