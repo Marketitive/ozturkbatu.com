@@ -88,6 +88,9 @@ img { max-width: 100%; display: block; }
 }
 .hero h1 { text-align: center; }
 .hero .role { color: var(--muted); }
+.hero-lines { margin-top: 2.4rem; display: grid; gap: 0.5rem; justify-items: center; }
+.hero-line { font: 400 clamp(1.1rem, 2vw, 1.55rem)/1.4 var(--font-display); margin: 0; width: fit-content; max-width: 100%; text-align: left; position: relative; }
+.js .hero-line { opacity: 0; }
 .scroll-hint { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); color: var(--muted); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
 .hero { position: relative; }
 
@@ -192,5 +195,6 @@ ins.fix {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   #preloader { display: none; }
+  .js .hero-line { opacity: 1; }
   
 }

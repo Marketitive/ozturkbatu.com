@@ -5,13 +5,21 @@ import GithubContributions from '../components/GithubContributions.astro';
 // About copy. Markup: {hl:text} highlight, {ul:text} underline, {ci:text} circle,
 // {x:wrong|right} strike the wrong word and write the correction.
 const about = [
-  "I'm Batu. I build the {ul:data infrastructure} that lets AI results {hl:compound} instead of evaporating after a demo.",
-  "Most AI investment goes into models, tools and frameworks, the visible layer. The bottleneck is {x:the model|the data}. Without a structured foundation, AI output is inconsistent, and value disappears when a session ends instead of compounding.",
-  "Closing that gap is the actual work: data architecture and pipelines that connect business systems to AI in a durable, {ul:auditable} way, so results persist and scale.",
-  "At {hl:AI.GROUP} I work on automation and AI initiatives across the group's portfolio companies, from early diagnostics to production systems. One example is an autonomous deal-flow pipeline for {hl:AI.FUND} that ingests pitch decks, researches the companies and drafts investment notes without manual handoffs.",
-  "Before this I played competitive volleyball, {ci:three-time national champion}. That built the discipline I bring to systems: repeatable, tested under pressure, not left to chance.",
-  "My Master's in Sport and Movement Science, with a thesis on athlete self-presentation, taught me the other half. Structured data collection usually breaks for {x:technical|human and organizational} reasons first.",
-  "This site is where I document that view.",
+  "Most AI investment goes into the visible layer: models, tools, frameworks. But what decides whether AI pays off is the {x:tool stack|foundation} underneath it: the systems that collect, structure and move data across a business.",
+  "Without them, AI output stays inconsistent, and its {hl:value disappears when the session ends}. I design and build those systems: data architecture, pipelines and AI agents that connect {ul:marketing, sales and customer success}, so results last, can be audited and keep {ci:compounding}.",
+  "In practice, that means one reliable record of every lead, customer and deal, pipelines that check facts before they reach a decision, and agents that work with the team's data instead of overwriting it. When the system is right, every campaign, deal and customer conversation makes the next one {ci:smarter}.",
+  "I came to this by {x:studying|building}. My first system, for a business I {hl:co-founded}, contacted new leads the moment they reached the CRM.",
+  "Later, I replaced manual outreach spreadsheets with enriched people databases and brought marketing data from every channel across a group of companies into one view. That work took me from a junior marketing role to {hl:leading AI and automation}.",
+  "Today I build and maintain a {ul:multi-agent system} for a venture fund that turns pitch decks into investment analyses partners can act on, checking its own facts along the way.",
+  "My own foundation was built on the court. I played professional volleyball in Türkiye and won {hl:three national championships}. Volleyball is a game of systems: rotations, set plays, and reading the opponent's patterns before the serve.",
+  "Talent wins points. {x:Talent|Structure} wins seasons. When injuries ended my career, I moved to Germany in 2015 and started over with a new language and a new field, {ul:teaching myself} the skills I use today.",
+  "I still see business the way I saw a match. Every market is a {ci:competition}, and there is no neutral side of the net.",
+  "Companies that build systems to turn their data into decisions, and run them with AI, will {x:keep up with|outplay} the ones that don't. You either build that advantage, or you compete against someone who has.",
+];
+
+const heroLines = [
+  "AI is only as good as the {x:model|data} underneath it.",
+  "I build the systems that turn it into {ci:revenue}.",
 ];
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
@@ -24,6 +32,7 @@ const ann = (s: string) =>
     return `<span class="ann" data-ann="${kind}">${body}</span>`;
   });
 const paragraphs = about.map(ann);
+const heroHtml = heroLines.map(ann);
 
 const projects = [
   {
@@ -82,6 +91,9 @@ const projects = [
       <div class="hero-grid">
         <h1>Hi, I'm Batu.</h1>
         <p class="role">AI &amp; RevOps Architect.</p>
+        <div class="hero-lines">
+          {heroHtml.map((html) => <p class="hero-line" set:html={html} />)}
+        </div>
       </div>
       <span class="scroll-hint">Scroll</span>
     </section>

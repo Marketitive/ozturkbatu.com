@@ -81,7 +81,7 @@ const paras = [...document.querySelectorAll('.para')];
 paras.forEach(splitWords);
 document.querySelectorAll('.ann').forEach((el) => {
   const next = el.nextElementSibling;
-  items.push({ el, a: null, fix: next && next.classList.contains('fix') ? next : null });
+  items.push({ el, scope: el.closest('.hero') ? 'hero' : 'about', a: null, fix: next && next.classList.contains('fix') ? next : null });
 });
 
 const groupLines = (words) => {
@@ -94,6 +94,43 @@ const groupLines = (words) => {
   });
   return lines;
 };
+
+function collapseFixes(list) {
+  list.filter((i) => i.fix).forEach((i) => {
+    i.fixW = i.fix.scrollWidth;
+    i.fixM = parseFloat(getComputedStyle(i.fix).marginLeft);
+    gsap.set(i.fix, { maxWidth: 0, marginLeft: 0 });
+  });
+}
+
+function addAnnotation(tl, i, drawDur) {
+  const paths = [...(i.a._svg?.querySelectorAll('path') || [])];
+  paths.forEach((path) => {
+    const len = path.getTotalLength();
+    gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
+    tl.to(path, { strokeDashoffset: 0, duration: drawDur / paths.length + 0.1 });
+  });
+  if (i.fix) tl.to(i.fix, { maxWidth: i.fixW, marginLeft: i.fixM, duration: 0.6 });
+}
+
+let heroCtx = null;
+/* Hero: plays once after the preloader (not scroll-driven; it is the intro) */
+function buildHero() {
+  const lines = [...document.querySelectorAll('.hero-line')];
+  if (!lines.length) return;
+  heroCtx = gsap.context(() => {
+    const mine = items.filter((i) => i.scope === 'hero');
+    // lock each line to its final width so corrections grow rightwards without shifting the text
+    lines.forEach((l) => gsap.set(l, { width: Math.ceil(l.getBoundingClientRect().width) + 1 }));
+    mine.forEach((entry) => { entry.a = make(entry.el); });
+    collapseFixes(mine);
+    const tl = gsap.timeline({ delay: 2.0, defaults: { ease: 'power1.out' } });
+    lines.forEach((l, k) => {
+      tl.fromTo(l, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7 }, k ? '+=0.3' : 0);
+      mine.filter((i) => l.contains(i.el)).forEach((i) => { tl.to({}, { duration: 0.35 }); addAnnotation(tl, i, 0.7); });
+    });
+  });
+}
 
 let aboutCtx = null;
 function buildAbout() {
@@ -110,17 +147,12 @@ function buildAbout() {
     });
 
     // measure in the final layout (corrections written), then collapse the corrections
-    items.forEach((entry) => { entry.a = make(entry.el); });
-    const fixes = items.filter((i) => i.fix).map((i) => {
-      const cs = getComputedStyle(i.fix);
-      i.fixW = i.fix.scrollWidth;
-      i.fixM = parseFloat(cs.marginLeft);
-      return i;
-    });
+    const aboutItems = items.filter((i) => i.scope === 'about');
+    aboutItems.forEach((entry) => { entry.a = make(entry.el); });
+    collapseFixes(aboutItems);
 
     const tl = gsap.timeline({ defaults: { ease: 'none' } });
     gsap.set(paras, { opacity: 0 });
-    fixes.forEach((i) => gsap.set(i.fix, { maxWidth: 0, marginLeft: 0 }));
 
     paras.forEach((par) => {
       const words = [...par.querySelectorAll('.w')];
@@ -133,13 +165,7 @@ function buildAbout() {
         tl.to(line, { opacity: 1, y: 0, duration: 0.5, stagger: 0.5 / Math.max(line.length, 1) });
         anns.filter((i) => !i.done && [...i.el.querySelectorAll('.w')].pop() && line.includes([...i.el.querySelectorAll('.w')].pop())).forEach((i) => {
           i.done = true;
-          const paths = [...(i.a._svg?.querySelectorAll('path') || [])];
-          paths.forEach((path) => {
-            const len = path.getTotalLength();
-            gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
-            tl.to(path, { strokeDashoffset: 0, duration: 0.55 / paths.length + 0.1 });
-          });
-          if (i.fix) tl.to(i.fix, { maxWidth: i.fixW, marginLeft: i.fixM, duration: 0.6 });
+          addAnnotation(tl, i, 0.55);
         });
       });
       tl.to({}, { duration: 1 });
@@ -150,7 +176,7 @@ function buildAbout() {
     items.forEach((i) => { i.done = false; });
 
     ScrollTrigger.create({
-      trigger: about, start: 'top top', end: () => `+=${Math.round(tl.duration() * window.innerHeight * 0.24)}`,
+      trigger: about, start: 'top top', end: () => `+=${Math.round(tl.duration() * window.innerHeight * 0.18)}`,
       pin: true, scrub: 0.4, animation: tl, refreshPriority: 1,
     });
   });
@@ -159,6 +185,8 @@ function buildAbout() {
 function destroyAbout() {
   aboutCtx?.revert();
   aboutCtx = null;
+  heroCtx?.revert();
+  heroCtx = null;
   items.forEach((i) => { i.a?.remove(); i.a = null; i.done = false; });
   root.classList.remove('about-pinned');
 }
@@ -167,6 +195,7 @@ if (reduced) {
   items.forEach((entry) => { entry.a = make(entry.el); });
 } else {
   (document.fonts?.ready ?? Promise.resolve()).then(() => {
+    buildHero();
     buildAbout();
     ScrollTrigger.sort();
     ScrollTrigger.refresh();
@@ -178,6 +207,7 @@ if (reduced) {
         if (window.innerWidth === lastW) return;
         lastW = window.innerWidth;
         destroyAbout();
+        buildHero();
         buildAbout();
         ScrollTrigger.refresh();
       }, 300);
