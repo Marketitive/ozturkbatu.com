@@ -91,30 +91,26 @@ img { max-width: 100%; display: block; }
 .scroll-hint { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); color: var(--muted); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
 .hero { position: relative; }
 
-/* About */
-.about { padding: 18vh 0 12vh; }
-.about .wrap { width: min(760px, 100% - 2rem); }
-.about .wrap > p {
-  font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem);
+/* About: flows normally (no JS / reduced motion); becomes a pinned, centred stage when .about-pinned is set */
+.about { padding: 14vh 0 10vh; }
+.about-stage { width: min(760px, 100% - 2rem); margin-inline: auto; }
+.para {
+  position: relative; font-family: var(--font-display); font-size: clamp(1.3rem, 2.8vw, 2.2rem);
   line-height: 1.45; margin: 0 0 2.2rem;
 }
+.about-pinned .about { padding: 0; }
+.about-pinned .about-stage { height: 100svh; display: grid; place-items: center; padding-top: 3.5rem; box-sizing: border-box; }
+.about-pinned .para { grid-area: 1 / 1; margin: 0; width: 100%; }
 .w { display: inline-block; }
-.js .w { opacity: 0; transform: translateY(8px); transition: opacity 0.6s, transform 0.6s; }
-.js .w.in { opacity: 1; transform: none; }
 .ann { position: relative; display: inline; }
 del { text-decoration: none; }
 html:not(.js) del { text-decoration: line-through; }
 ins.fix {
   font-family: var(--font-hand); text-decoration: none; color: var(--ann-pen);
   font-size: 1.15em; margin-left: 0.3em;
-}
-/* correction takes no space until written, then grows so the line reflows */
-.js ins.fix {
   display: inline-block; overflow: clip; white-space: nowrap; vertical-align: baseline;
-  max-width: 0; margin-left: 0; padding-block: 0.2em; margin-block: -0.2em;
-  transition: max-width 0.6s ease-out, margin-left 0.6s ease-out;
+  padding-block: 0.2em; margin-block: -0.2em;
 }
-.js ins.fix.show { margin-left: 0.3em; }
 
 /* Heatmap */
 .gh { margin-top: 2.5rem; }
@@ -196,6 +192,5 @@ ins.fix {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   #preloader { display: none; }
-  .js .w { opacity: 1; transform: none; transition: none; }
-  .js ins.fix { max-width: none; margin-left: 0.3em; transition: none; }
+  
 }
