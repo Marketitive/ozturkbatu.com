@@ -36,31 +36,31 @@ const heroHtml = heroLines.map(ann);
 
 const projects = [
   {
-    slug: 'gallerymvp', title: '20Horizon', rot: -4,
+    img: '20horizon.jpg', title: '20Horizon', rot: -4,
     left: "A walkable 3D gallery that proves attribution, not just aesthetics. Built to test whether one shared gallery can drive attributable traffic to individual artists' portfolios, without a SaaS platform or a game engine.",
     right: "A Next.js and React Three Fiber room with click-to-move and focus-zoom. Every portfolio click routes through a server redirect that logs it, filters bots and dedupes repeat visits.",
     stack: ['Next.js', 'React Three Fiber', 'TypeScript', 'SQLite'],
   },
   {
-    slug: 'marketinglab', title: 'MarketingLab', rot: 3,
+    img: 'marketinglab.jpg', title: 'MarketingLab', rot: 3,
     left: "A/B test content against a simulated audience before it ever goes live, instead of spending real followers to find out.",
     right: "Hundreds of independent AI agents, each with its own interests and connections, decide whether to view, engage or ignore each variant across staged rounds. Results roll up into one composite score per variant.",
     stack: ['Next.js', 'FastAPI', 'OpenAI', 'WebSocket'],
   },
   {
-    slug: 'divit', title: 'Divit', rot: -2,
+    img: 'divit.jpg', title: 'Divit', rot: -2,
     left: "An AI writing coach that asks what you are trying to do before it tells you how to write it.",
     right: "The stated goal becomes the filter for all feedback, grounded in storytelling frameworks. Paragraphs can be locked out of AI review, and everything stays local in the browser.",
     stack: ['React', 'TipTap', 'FastAPI', 'LangChain'],
   },
   {
-    slug: 'deeplocate', title: 'DeepLocate', rot: 4,
+    img: 'deeplocate.svg', title: 'DeepLocate', rot: 4,
     left: "Exhaustive local business data, past the 20-result wall every mapping API hits.",
     right: "Quad-tree decomposition recursively splits an area until every cell is under the cap, so each business is captured exactly once. Runs as a CLI or a live map that visualizes the subdivision.",
     stack: ['Python', 'FastAPI', 'Leaflet', 'Pandas'],
   },
   {
-    slug: 'perfin', title: 'Perfin', rot: -3,
+    img: 'perfin.jpg', title: 'Perfin', rot: -3,
     left: "Personal finance intelligence that never sends your bank data to the cloud.",
     right: "A fully offline ML pipeline: transaction categorization, fuzzy merchant matching, recurring-bill detection, anomaly flags and cash-flow forecasting, through a REST API or a 20+ command CLI.",
     stack: ['Python', 'scikit-learn', 'SQLAlchemy', 'Flask'],
@@ -115,7 +115,7 @@ const projects = [
                 <p>{p.left}</p>
               </div>
               <figure class="polaroid" style={`--rot:${p.rot}deg`}>
-                <img src={`/projects/${p.slug}.svg`} alt={`${p.title} screenshot`} loading="lazy" />
+                <img src={`/projects/${p.img}`} alt={`${p.title} screenshot`} loading="lazy" />
                 <figcaption>{p.title}</figcaption>
               </figure>
               <div class="txt-r">
