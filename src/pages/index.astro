@@ -37,38 +37,38 @@ const heroHtml = heroLines.map(ann);
 const projects = [
   {
     img: 'medzeka.jpg', title: 'Medzeka', rot: 3,
-    left: "Reporting for private clinics that does not guess. A supervisor agent hands research to a specialist agent, and every number in a report is checked against the clinic's data before anyone sees it.",
-    right: "A live dashboard for revenue, no-shows, appointments and acquisition channels, with forecasts and an AI briefing that is checked against the numbers before it is shown. The demo runs on a synthetic dermatology clinic.",
+    left: "An agentic layer on top of a private clinic's data. It aggregates appointments, revenue and performance, pseudonymizes everything for GDPR, then analyzes it with ML and AI.",
+    right: "It predicts no-shows, revenue, performance and appointment calendars, and every week writes a C-level report that lands with the founders and owners.",
     stack: ['Python', 'Deep Agents', 'Postgres', 'Qdrant'],
   },
   {
     img: '20horizon.jpg', title: '20Horizon', rot: -4,
-    left: "A walkable 3D gallery that proves attribution, not just aesthetics. Built to test whether one shared gallery can drive attributable traffic to individual artists' portfolios, without a SaaS platform or a game engine.",
-    right: "A Next.js and React Three Fiber room with click-to-move and focus-zoom. Every portfolio click routes through a server redirect that logs it, filters bots and dedupes repeat visits.",
+    left: "Artists struggle with visibility, and posting more content or hosting a personal gallery only works as well as their own marketing skills. 20Horizon takes that job off their hands.",
+    right: "Twenty artworks from twenty artists share one gallery for 60 days, with professional marketing behind all of them. Traffic comes into the gallery first, then each artist's profile sends buyers on to their own site.",
     stack: ['Next.js', 'React Three Fiber', 'TypeScript', 'SQLite'],
   },
   {
     img: 'marketinglab.jpg', title: 'MarketingLab', rot: 3,
-    left: "A/B test content against a simulated audience before it ever goes live, instead of spending real followers to find out.",
-    right: "Hundreds of independent AI agents, each with its own interests and connections, decide whether to view, engage or ignore each variant across staged rounds. Results roll up into one composite score per variant.",
+    left: "A synthetic population built from a brand's ideal customer profiles, so content can be tested before it costs real money in a real campaign.",
+    right: "Hundreds of AI agents react to each content variant, deciding to view, engage or ignore. The best performer is found without running A/B tests on live audiences.",
     stack: ['Next.js', 'FastAPI', 'OpenAI', 'WebSocket'],
   },
   {
     img: 'divit.jpg', title: 'Divit', rot: -2,
-    left: "An AI writing coach that asks what you are trying to do before it tells you how to write it.",
-    right: "The stated goal becomes the filter for all feedback, grounded in storytelling frameworks. Paragraphs can be locked out of AI review, and everything stays local in the browser.",
+    left: "Divit frees writers from the blank page. An agent that knows multiple storytelling frameworks turns the writer's goal into an end-to-end narrative strategy.",
+    right: "The chosen narrative shapes every tip and hint along the way, so the author finishes the work with an AI co-writer in less time.",
     stack: ['React', 'TipTap', 'FastAPI', 'LangChain'],
   },
   {
     img: 'deeplocate.jpg', title: 'DeepLocate', rot: 4,
-    left: "Exhaustive local business data, past the 20-result wall every mapping API hits.",
-    right: "Quad-tree decomposition recursively splits an area until every cell is under the cap, so each business is captured exactly once. Runs as a CLI or a live map that visualizes the subdivision.",
+    left: "Local business data is hard to get. Most databases barely cover it, which leaves Google Maps as the only source, and its limits make automated collection painful.",
+    right: "DeepLocate takes the coordinates of a city or district and scans the whole area. It starts with one large rectangle and keeps splitting any zone with too many results, until every cell is under the threshold.",
     stack: ['Python', 'FastAPI', 'Leaflet', 'Pandas'],
   },
   {
     img: 'perfin.jpg', title: 'Perfin', rot: -3,
-    left: "Personal finance intelligence that never sends your bank data to the cloud.",
-    right: "A fully offline ML pipeline: transaction categorization, fuzzy merchant matching, recurring-bill detection, anomaly flags and cash-flow forecasting, through a REST API or a 20+ command CLI.",
+    left: "A personal finance agent I run locally. It reads monthly invoices and bank statements, recognizes the issuing bank and its statement format, and extracts the data.",
+    right: "Statements are anonymized before an ML model analyzes them. The result is a budget that updates itself, income and expense forecasts, and a nudge toward financial discipline.",
     stack: ['Python', 'scikit-learn', 'SQLAlchemy', 'Flask'],
   },
 ];
@@ -112,7 +112,7 @@ const projects = [
 
     <section class="projects" id="projects">
       <div class="wrap">
-        <h2 class="section-title">Selected work</h2>
+        <h2 class="section-title">Selected projects</h2>
         <div class="stage" id="stage">
           {projects.map((p) => (
             <article class="project">
