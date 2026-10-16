@@ -75,7 +75,7 @@ img { max-width: 100%; display: block; }
 
 /* Hero (placeholder until the 3D bust) */
 .hero {
-  min-height: 100svh; display: grid; place-items: center;
+  min-height: 84svh; display: grid; place-items: center;
   padding: 5rem 1rem 3rem;
 }
 .hero-grid {
@@ -161,7 +161,8 @@ ins.fix {
   .project .txt-l, .project .txt-r { text-align: left; margin-top: 1rem; }
   .project .txt-l .stack { justify-content: flex-start; }
   .project .polaroid { width: min(86%, 380px); margin-inline: auto; }
-  .site-header nav a.hide-sm { display: none; }
+  .site-header nav { gap: 0.9rem; font-size: 0.82rem; }
+  .site-header .sig { height: 32px; }
 }
 
 /* Contact */

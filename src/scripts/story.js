@@ -4,6 +4,9 @@ import { annotate } from 'rough-notation';
 
 gsap.registerPlugin(ScrollTrigger);
 
+/* scroll distance of the About story: viewport heights of scrolling per timeline unit (higher = slower) */
+const ABOUT_SCROLL_PER_UNIT = 0.3;
+
 const root = document.documentElement;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -133,6 +136,15 @@ function buildHero() {
 }
 
 let aboutCtx = null;
+let aboutTl = null;
+let aboutSt = null;
+/* the About nav link lands on the personal story ("I came to this by building") */
+const BIO_SCENE = 3;
+const aboutTarget = () => {
+  if (!aboutSt || !aboutTl) return null;
+  const t = aboutTl.labels.bio ?? 0;
+  return Math.round(aboutSt.start + (t / aboutTl.duration()) * (aboutSt.end - aboutSt.start));
+};
 function buildAbout() {
   const about = document.getElementById('about');
   if (!about || !paras.length) return;
@@ -154,19 +166,21 @@ function buildAbout() {
     const tl = gsap.timeline({ defaults: { ease: 'none' } });
     gsap.set(paras, { opacity: 0 });
 
-    paras.forEach((par) => {
+    paras.forEach((par, sceneIdx) => {
       const words = [...par.querySelectorAll('.w')];
       const lines = groupLines(words);
       const anns = items.filter((i) => par.contains(i.el));
       gsap.set(words, { opacity: 0, y: 10 });
 
-      tl.to(par, { opacity: 1, duration: 0.25 });
-      lines.forEach((line) => {
+      if (sceneIdx === 0) tl.set(par, { opacity: 1 });
+      else tl.to(par, { opacity: 1, duration: 0.25 });
+      lines.forEach((line, lineIdx) => {
         tl.to(line, { opacity: 1, y: 0, duration: 0.5, stagger: 0.5 / Math.max(line.length, 1) });
         anns.filter((i) => !i.done && [...i.el.querySelectorAll('.w')].pop() && line.includes([...i.el.querySelectorAll('.w')].pop())).forEach((i) => {
           i.done = true;
           addAnnotation(tl, i, 0.55);
         });
+        if (sceneIdx === BIO_SCENE && lineIdx === 0) tl.addLabel('bio', '>+=0.2');
       });
       tl.to({}, { duration: 1 });
       tl.to(par, { opacity: 0, duration: 0.3 });
@@ -175,8 +189,9 @@ function buildAbout() {
     tl.set(paras[paras.length - 1], { opacity: 1 }, '>').to({}, { duration: 0.6 });
     items.forEach((i) => { i.done = false; });
 
-    ScrollTrigger.create({
-      trigger: about, start: 'top top', end: () => `+=${Math.round(tl.duration() * window.innerHeight * 0.18)}`,
+    aboutTl = tl;
+    aboutSt = ScrollTrigger.create({
+      trigger: about, start: 'top top', end: () => `+=${Math.round(tl.duration() * window.innerHeight * ABOUT_SCROLL_PER_UNIT)}`,
       pin: true, scrub: 0.4, animation: tl, refreshPriority: 1,
     });
   });
@@ -185,6 +200,8 @@ function buildAbout() {
 function destroyAbout() {
   aboutCtx?.revert();
   aboutCtx = null;
+  aboutTl = null;
+  aboutSt = null;
   heroCtx?.revert();
   heroCtx = null;
   items.forEach((i) => { i.a?.remove(); i.a = null; i.done = false; });
@@ -199,6 +216,7 @@ if (reduced) {
     buildAbout();
     ScrollTrigger.sort();
     ScrollTrigger.refresh();
+    if (location.hash === '#about') [60, 500].forEach((ms) => setTimeout(() => { const y = aboutTarget(); if (y !== null) window.scrollTo(0, y); }, ms));
     let lastW = window.innerWidth;
     let timer;
     window.addEventListener('resize', () => {
@@ -222,8 +240,11 @@ mm.add('(min-width: 769px) and (prefers-reduced-motion: no-preference)', () => {
   const projects = gsap.utils.toArray('.project');
   if (!stage || !projects.length) return;
 
+  // the first project is already in place, so jumping to #projects never lands on an empty screen
   projects.forEach((p, i) => {
-    gsap.set(p.querySelector('.polaroid'), { autoAlpha: 0, y: '60vh', rotation: (i % 2 ? 1 : -1) * 14, scale: 1.1, zIndex: i + 1 });
+    gsap.set(p.querySelector('.polaroid'), { zIndex: i + 1 });
+    if (i === 0) return;
+    gsap.set(p.querySelector('.polaroid'), { autoAlpha: 0, y: '60vh', rotation: (i % 2 ? 1 : -1) * 14, scale: 1.1 });
     gsap.set([p.querySelector('.txt-l'), p.querySelector('.txt-r')], { autoAlpha: 0, y: 24 });
   });
 
@@ -234,7 +255,8 @@ mm.add('(min-width: 769px) and (prefers-reduced-motion: no-preference)', () => {
     const pol = p.querySelector('.polaroid');
     const texts = [p.querySelector('.txt-l'), p.querySelector('.txt-r')];
     const rot = parseFloat(getComputedStyle(pol).getPropertyValue('--rot')) || 0;
-    if (i > 0) {
+    if (i === 0) { tl.to({}, { duration: 0.8 }); return; }
+    {
       const prev = projects[i - 1];
       tl.to([prev.querySelector('.txt-l'), prev.querySelector('.txt-r')], { autoAlpha: 0, y: -24, duration: 0.4 }, '>');
     }
@@ -251,3 +273,20 @@ mm.add('(max-width: 768px), (prefers-reduced-motion: reduce)', () => {
     gsap.from(p, { autoAlpha: 0, y: 40, duration: 0.7, scrollTrigger: { trigger: p, start: 'top 85%', once: true } });
   });
 });
+
+/* About lands on the personal story; the nav link goes there instead of the top of the pinned section */
+document.querySelectorAll('a[href="#about"]').forEach((a) => {
+  a.addEventListener('click', (e) => {
+    const y = aboutTarget();
+    if (y === null) return;
+    e.preventDefault();
+    history.replaceState(null, '', '#about');
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  });
+});
+
+/* the "Scroll" hint fades out as soon as scrolling starts */
+const hint = document.querySelector('.scroll-hint');
+if (hint && !reduced) {
+  gsap.to(hint, { opacity: 0, ease: 'none', scrollTrigger: { start: 0, end: 160, scrub: true } });
+}
