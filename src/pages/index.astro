@@ -1,6 +1,5 @@
 ---
 import StoryLayout from '../layouts/StoryLayout.astro';
-import GithubContributions from '../components/GithubContributions.astro';
 import StoryHeader from '../components/StoryHeader.astro';
 import PostList from '../components/PostList.astro';
 import { getCollection } from 'astro:content';
@@ -82,7 +81,7 @@ const projects = [
 ---
 
 <StoryLayout>
-  <div id="preloader" aria-hidden="true"><img src="/signature.png" alt="" /></div>
+  <div id="preloader" aria-hidden="true"><canvas id="sig-canvas" width="700" height="385"></canvas></div>
   <noscript><style>#preloader{display:none}</style></noscript>
 
   <StoryHeader home />
@@ -144,14 +143,13 @@ const projects = [
           <div class="contact-img"><img src="/profile.jpeg" alt="Batuhan Öztürk surfing in a suit" loading="lazy" /></div>
           <div>
             <h2 class="section-title">Let's talk.</h2>
-            <a class="mail" href="mailto:ozturkbatu@gmail.com">ozturkbatu@gmail.com</a>
             <div class="links">
+              <a href="mailto:ozturkbatu@gmail.com">Email ↗</a>
               <a href="https://www.linkedin.com/in/ozturkbatu/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
               <a href="https://x.com/ozturkbatu_" target="_blank" rel="noopener noreferrer">X ↗</a>
               <a href="https://github.com/ozturkbatu" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
             </div>
             {/* CV button: re-enable once public/cv.pdf exists */}
-            <GithubContributions />
           </div>
         </div>
       </div>

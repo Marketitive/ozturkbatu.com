@@ -45,12 +45,7 @@ img { max-width: 100%; display: block; }
   transition: opacity 0.5s;
 }
 #preloader.done { opacity: 0; pointer-events: none; }
-#preloader img {
-  width: min(70vw, 460px); filter: var(--sig-filter);
-  clip-path: inset(0 100% 0 0);
-  animation: sig-draw 1.2s cubic-bezier(0.65, 0, 0.35, 1) 0.15s forwards;
-}
-@keyframes sig-draw { to { clip-path: inset(0 0 0 0); } }
+#preloader canvas { width: min(70vw, 460px); height: auto; filter: var(--sig-filter); }
 
 /* Header */
 .site-header {

@@ -1,6 +1,7 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { annotate } from 'rough-notation';
+import { drawSignature } from './signature.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,14 +19,26 @@ document.getElementById('theme-toggle')?.addEventListener('click', () => {
   recolorAnnotations();
 });
 
-/* Preloader: signature draws, then fades. Click skips. */
+/* Preloader: the signature is drawn stroke by stroke, then fades. Click skips. */
 const pre = document.getElementById('preloader');
+let preDone = Promise.resolve();
 if (pre) {
-  const hide = () => pre.classList.add('done');
   if (reduced) pre.remove();
   else {
-    setTimeout(hide, 1700);
-    pre.addEventListener('click', hide);
+    preDone = new Promise((resolve) => {
+      let finished = false;
+      const hide = () => {
+        if (finished) return;
+        finished = true;
+        pre.classList.add('done');
+        resolve();
+      };
+      pre.addEventListener('click', hide);
+      setTimeout(hide, 5000);
+      drawSignature(document.getElementById('sig-canvas'), 2.1)
+        .then(() => setTimeout(hide, 350))
+        .catch(hide);
+    });
   }
 }
 
@@ -127,7 +140,8 @@ function buildHero() {
     lines.forEach((l) => gsap.set(l, { width: Math.ceil(l.getBoundingClientRect().width) + 1 }));
     mine.forEach((entry) => { entry.a = make(entry.el); });
     collapseFixes(mine);
-    const tl = gsap.timeline({ delay: 2.0, defaults: { ease: 'power1.out' } });
+    const tl = gsap.timeline({ paused: true, defaults: { ease: 'power1.out' } });
+    preDone.then(() => tl.delay(0.2).play());
     lines.forEach((l, k) => {
       tl.fromTo(l, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7 }, k ? '+=0.3' : 0);
       mine.filter((i) => l.contains(i.el)).forEach((i) => { tl.to({}, { duration: 0.35 }); addAnnotation(tl, i, 0.7); });
