@@ -25,8 +25,10 @@ const canonical = new URL(Astro.url.pathname, 'https://www.ozturkbatu.com').href
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content="https://www.ozturkbatu.com/profile.jpeg" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content="https://www.ozturkbatu.com/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>{title}</title>
     <script is:inline>
       document.documentElement.classList.add('js');

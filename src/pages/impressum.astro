@@ -1,56 +1,59 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import StoryLayout from '../layouts/StoryLayout.astro';
+import StoryHeader from '../components/StoryHeader.astro';
 ---
 
-<BaseLayout title="Imprint - Batuhan Öztürk" description="Imprint and legal information">
-  <div class="max-w-4xl mx-auto px-6 py-12">
-    <h1 class="text-4xl font-bold text-foreground mb-8">Imprint</h1>
+<StoryLayout title="Imprint - Batuhan Öztürk" description="Imprint and legal information">
+  <StoryHeader />
+  <main class="subpage"><div class="wrap narrow legal">
+    <h1 class="section-title">Imprint</h1>
     
-    <div class="prose prose-neutral dark:prose-invert max-w-none">
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold text-foreground mb-4">Information pursuant to § 5 DDG</h2>
-        <p class="text-muted-foreground mb-2">Batuhan Öztürk</p>
-        <p class="text-muted-foreground">Germany</p>
-        <p class="text-muted-foreground mt-4">This is a private, non-commercial website. It does not sell products or services.</p>
+    <div>
+      <section>
+        <h2>Information pursuant to § 5 DDG</h2>
+        <p>Batuhan Öztürk</p>
+        <p>Germany</p>
+        <p>This is a private, non-commercial website. It does not sell products or services.</p>
       </section>
 
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold text-foreground mb-4">Contact</h2>
-        <p class="text-muted-foreground mb-2">E-Mail: ozturkbatu@gmail.com</p>
+      <section>
+        <h2>Contact</h2>
+        <p>E-Mail: ozturkbatu@gmail.com</p>
       </section>
 
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold text-foreground mb-4">Liability for Contents</h2>
-        <p class="text-muted-foreground mb-4">
+      <section>
+        <h2>Liability for Contents</h2>
+        <p>
           As service providers, we are liable for own contents of these websites according to § 7 para. 1 German Digital Services Act (DDG). However, according to §§ 8 to 10 German Digital Services Act (DDG), service providers are not obligated to permanently monitor submitted or stored information or to search for evidences that indicate illegal activities.
         </p>
-        <p class="text-muted-foreground mb-4">
+        <p>
           Legal obligations to removing information or to blocking the use of information remain unchallenged. In this case, liability is only possible at the time of knowledge about a specific violation of law. Illegal contents will be removed immediately at the time we get knowledge of them.
         </p>
       </section>
 
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold text-foreground mb-4">Liability for Links</h2>
-        <p class="text-muted-foreground mb-4">
+      <section>
+        <h2>Liability for Links</h2>
+        <p>
           Our offer includes links to external third party websites. We have no influence on the contents of those websites, therefore we cannot guarantee for those contents. Providers or administrators of linked websites are always responsible for their own contents.
         </p>
-        <p class="text-muted-foreground mb-4">
+        <p>
           The linked websites had been checked for possible violations of law at the time of the establishment of the link. Illegal contents were not detected at the time of the linking. A permanent monitoring of the contents of linked websites cannot be imposed without reasonable indications that there has been a violation of law. Illegal links will be removed immediately at the time we get knowledge of them.
         </p>
       </section>
 
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold text-foreground mb-4">Copyright</h2>
-        <p class="text-muted-foreground mb-4">
+      <section>
+        <h2>Copyright</h2>
+        <p>
           You are permitted to use, modify, and build upon the content from ozturkbatu.com for both private and commercial purposes. This includes utilizing the information, ideas, articles, graphics, and designs provided, as long as appropriate credit is given to ozturkbatu.com and the original author, Batuhan Öztürk.
         </p>
         
-        <h3 class="text-xl font-semibold text-foreground mb-3 mt-6">Attribution Requirements</h3>
-        <p class="text-muted-foreground">
+        <h3>Attribution Requirements</h3>
+        <p>
           If you republish, reshare, or publicly display any content from ozturkbatu.com, you must clearly attribute the work to Batuhan Öztürk and include a link to the original source. Modifications should be noted clearly if the original content has been altered significantly.
         </p>
       </section>
     </div>
-  </div>
-</BaseLayout>
+  </div></main>
+  <script>import '../scripts/theme.js';</script>
+</StoryLayout>
 

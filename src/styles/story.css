@@ -219,3 +219,13 @@ ins.fix {
 .post-body img { border-radius: 4px; margin: 1.5rem 0; }
 .post-body code { font-size: 0.9em; }
 .post .back { margin-top: 3rem; }
+
+/* Legal pages */
+.legal section { margin: 0 0 2.2rem; }
+.legal h2 { font: 400 1.7rem var(--font-display); margin: 0 0 0.8rem; }
+.legal h3 { font: 400 1.3rem var(--font-display); margin: 1.4rem 0 0.5rem; }
+.legal p, .legal li { color: var(--muted); }
+.legal ul { padding-left: 1.2rem; }
+.legal a { text-decoration: underline; text-underline-offset: 3px; color: var(--fg); }
+.legal strong { color: var(--fg); font-weight: 500; }
+.legal h1, .legal h2, .legal h3 { color: var(--fg); }

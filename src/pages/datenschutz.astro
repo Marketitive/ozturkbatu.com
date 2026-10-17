@@ -1,86 +1,88 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import StoryLayout from '../layouts/StoryLayout.astro';
+import StoryHeader from '../components/StoryHeader.astro';
 ---
 
-<BaseLayout title="Privacy Policy - Batuhan Öztürk" description="Privacy policy and data protection information according to GDPR">
-  <div class="max-w-4xl mx-auto px-6 py-12">
-    <h1 class="text-4xl font-bold text-foreground mb-8">Privacy Policy</h1>
+<StoryLayout title="Privacy Policy - Batuhan Öztürk" description="Privacy policy and data protection information according to GDPR">
+  <StoryHeader />
+  <main class="subpage"><div class="wrap narrow legal">
+    <h1 class="section-title">Privacy Policy</h1>
     
-    <div class="prose prose-neutral dark:prose-invert max-w-none">
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold text-foreground mb-4">1. Data Protection at a Glance</h2>
+    <div>
+      <section>
+        <h2>1. Data Protection at a Glance</h2>
         
-        <h3 class="text-xl font-semibold text-foreground mb-3 mt-6">General Information</h3>
-        <p class="text-muted-foreground mb-4">
+        <h3>General Information</h3>
+        <p>
           The following information provides a simple overview of what happens to your personal data when you visit this website. 
           Personal data is any data by which you can be personally identified.
         </p>
 
-        <h3 class="text-xl font-semibold text-foreground mb-3 mt-6">Data Collection on This Website</h3>
-        <p class="text-muted-foreground mb-4">
-          <strong class="text-foreground">Who is responsible for data collection on this website?</strong><br />
+        <h3>Data Collection on This Website</h3>
+        <p>
+          <strong>Who is responsible for data collection on this website?</strong><br />
           Data processing on this website is carried out by the website operator. You can find their contact details in the "Responsible Party" 
           section of this privacy policy.
         </p>
 
-        <p class="text-muted-foreground mb-4">
-          <strong class="text-foreground">How do we collect your data?</strong><br />
+        <p>
+          <strong>How do we collect your data?</strong><br />
           Your data is collected when you provide it to us (e.g., when you email us). Other data is collected automatically by our IT systems 
           when you visit the website. This is mainly technical data (e.g., internet browser, operating system, or time of page view).
         </p>
 
-        <p class="text-muted-foreground mb-4">
-          <strong class="text-foreground">What do we use your data for?</strong><br />
+        <p>
+          <strong>What do we use your data for?</strong><br />
           Some of the data is collected to ensure the proper functioning of the website. Other data may be used to analyze your user behavior 
           for website optimization and content improvement.
         </p>
 
-        <p class="text-muted-foreground">
-          <strong class="text-foreground">What rights do you have regarding your data?</strong><br />
+        <p>
+          <strong>What rights do you have regarding your data?</strong><br />
           You have the right to receive information about the origin, recipient, and purpose of your stored personal data free of charge at any time. 
           You also have the right to request the correction or deletion of this data. If you have given consent to data processing, you can revoke 
           this consent at any time for the future.
         </p>
       </section>
 
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold text-foreground mb-4">2. Responsible Party</h2>
-        <p class="text-muted-foreground mb-2">The responsible party for data processing on this website is:</p>
-        <div class="bg-card/30 rounded-lg p-4 mb-4">
-          <p class="text-muted-foreground mb-2"><strong class="text-foreground">Batuhan Öztürk</strong></p>
-          <p class="text-muted-foreground mb-2">Germany</p>
-          <p class="text-muted-foreground">Email: ozturkbatu@gmail.com</p>
+      <section>
+        <h2>2. Responsible Party</h2>
+        <p>The responsible party for data processing on this website is:</p>
+        <div>
+          <p><strong>Batuhan Öztürk</strong></p>
+          <p>Germany</p>
+          <p>Email: ozturkbatu@gmail.com</p>
         </div>
-        <p class="text-muted-foreground">
+        <p>
           The responsible party is the natural or legal person who alone or jointly with others decides on the purposes and means of processing 
           personal data (e.g., names, email addresses, etc.).
         </p>
       </section>
 
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold text-foreground mb-4">3. Hosting</h2>
-        <p class="text-muted-foreground mb-4">
+      <section>
+        <h2>3. Hosting</h2>
+        <p>
           This website is hosted by Cloudflare, Inc. (101 Townsend St, San Francisco, CA 94107, USA) using Cloudflare Workers. 
           When you visit the site, Cloudflare processes technical connection data such as your IP address, request metadata and 
           timestamps in order to deliver the site and protect it against abuse. Data may be processed outside the EU; Cloudflare relies on 
           the EU-US Data Privacy Framework and standard contractual clauses.
         </p>
-        <p class="text-muted-foreground mb-4">
+        <p>
           Hosting is carried out for the purpose of secure, fast and efficient provision of our online services (Art. 6 para. 1 lit. f GDPR). 
           You can find Cloudflare's privacy policy at: 
-          <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">https://www.cloudflare.com/privacypolicy/</a>
+          <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">https://www.cloudflare.com/privacypolicy/</a>
         </p>
       </section>
 
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold text-foreground mb-4">4. Data Collection on This Website</h2>
+      <section>
+        <h2>4. Data Collection on This Website</h2>
         
-        <h3 class="text-xl font-semibold text-foreground mb-3 mt-6">Server Log Files</h3>
-        <p class="text-muted-foreground mb-4">
+        <h3>Server Log Files</h3>
+        <p>
           The provider of the pages automatically collects and stores information in so-called server log files, which your browser automatically 
           transmits to us. These are:
         </p>
-        <ul class="list-disc list-inside text-muted-foreground mb-4 space-y-1">
+        <ul>
           <li>Browser type and browser version</li>
           <li>Operating system used</li>
           <li>Referrer URL</li>
@@ -88,148 +90,149 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <li>Time of the server request</li>
           <li>IP address</li>
         </ul>
-        <p class="text-muted-foreground">
+        <p>
           This data is not merged with other data sources. The collection of this data is based on Art. 6 para. 1 lit. f GDPR. 
           The website operator has a legitimate interest in the technically error-free presentation and optimization of their website.
         </p>
 
-        <h3 class="text-xl font-semibold text-foreground mb-3 mt-6">Contact via Email</h3>
-        <p class="text-muted-foreground mb-4">
+        <h3>Contact via Email</h3>
+        <p>
           If you contact us via email, we will store your email address and the content of your message to respond to your inquiry. 
           This data processing is based on Art. 6 para. 1 lit. f GDPR (legitimate interest in responding to inquiries).
         </p>
-        <p class="text-muted-foreground">
+        <p>
           We will delete this data after your inquiry has been conclusively answered, unless legal retention periods apply.
         </p>
       </section>
 
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold text-foreground mb-4">5. Cookies and Analytics</h2>
+      <section>
+        <h2>5. Cookies and Analytics</h2>
         
-        <h3 class="text-xl font-semibold text-foreground mb-3 mt-6">Local Storage</h3>
-        <p class="text-muted-foreground mb-4">
+        <h3>Local Storage</h3>
+        <p>
           This website stores your analytics choice (accepted or declined) and your light/dark theme preference in your browser's local storage so that the banner is not shown again and your preference is kept. 
           This is strictly necessary to honor your decisions (§ 25 para. 2 no. 2 TDDDG).
         </p>
 
-        <h3 class="text-xl font-semibold text-foreground mb-3 mt-6">Google Analytics 4</h3>
-        <p class="text-muted-foreground mb-4">
+        <h3>Google Analytics 4</h3>
+        <p>
           This website uses Google Analytics 4, a web analytics service provided by Google LLC ("Google"). Google Analytics uses cookies 
           to help us analyze how users interact with our website. The information generated by the cookie about your use of this website 
           (including your IP address) will be transmitted to and stored by Google on servers in the United States.
         </p>
         
-        <p class="text-muted-foreground mb-4">
-          <strong class="text-foreground">Purpose of Processing:</strong><br />
+        <p>
+          <strong>Purpose of Processing:</strong><br />
           Google will use this information on our behalf for the purpose of evaluating your use of the website, compiling reports on 
           website activity, and providing other services relating to website activity and internet usage.
         </p>
         
-        <p class="text-muted-foreground mb-4">
-          <strong class="text-foreground">Legal Basis:</strong><br />
+        <p>
+          <strong>Legal Basis:</strong><br />
           Google Analytics is only loaded after you give consent through the banner shown on your first visit (Art. 6 para. 1 lit. a GDPR 
           and § 25 para. 1 TDDDG). If you decline, no Google Analytics script is loaded and no analytics cookies are set.
         </p>
         
-        <p class="text-muted-foreground mb-4">
-          <strong class="text-foreground">IP Anonymization:</strong><br />
+        <p>
+          <strong>IP Anonymization:</strong><br />
           We have activated IP anonymization on this website. Your IP address will be shortened by Google within member states of the 
           European Union or in other contracting states to the Agreement on the European Economic Area before transmission to the United States.
         </p>
         
-        <p class="text-muted-foreground mb-4">
-          <strong class="text-foreground">Data Retention:</strong><br />
+        <p>
+          <strong>Data Retention:</strong><br />
           Google Analytics data is automatically deleted after 14 months. Data whose retention period has been reached is automatically 
           deleted once a month.
         </p>
         
-        <p class="text-muted-foreground mb-4">
-          <strong class="text-foreground">Opt-Out:</strong><br />
+        <p>
+          <strong>Opt-Out:</strong><br />
           You can prevent Google's collection and use of data (cookies and IP address) by downloading and installing the browser plugin 
-          available at: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">https://tools.google.com/dlpage/gaoptout</a>
+          available at: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">https://tools.google.com/dlpage/gaoptout</a>
         </p>
         
-        <p class="text-muted-foreground mb-4">
+        <p>
           You can withdraw or change your consent at any time for the future: 
-          <a href="#" onclick="window.resetAnalyticsConsent(); return false;" class="text-accent hover:underline">Change analytics consent</a>.
+          <a href="#" onclick="window.resetAnalyticsConsent(); return false;">Change analytics consent</a>.
         </p>
         
-        <p class="text-muted-foreground">
+        <p>
           More information about Google Analytics terms of use and Google's privacy policy can be found at: 
-          <a href="https://marketingplatform.google.com/about/analytics/terms/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">Google Analytics Terms</a> 
-          and <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">Google Privacy Policy</a>.
+          <a href="https://marketingplatform.google.com/about/analytics/terms/" target="_blank" rel="noopener noreferrer">Google Analytics Terms</a> 
+          and <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>.
         </p>
       </section>
 
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold text-foreground mb-4">6. Social Media Links</h2>
-        <p class="text-muted-foreground mb-4">
+      <section>
+        <h2>6. Social Media Links</h2>
+        <p>
           This website contains links to social media platforms (LinkedIn, X/Twitter, GitHub). When you click on these links, 
           you will be redirected to the respective platforms. We have no influence on the data processing by these platforms.
         </p>
-        <p class="text-muted-foreground">
+        <p>
           Please refer to the privacy policies of the respective platforms:
         </p>
-        <ul class="list-disc list-inside text-muted-foreground space-y-1 mt-2">
-          <li><a href="https://www.linkedin.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">LinkedIn Privacy Policy</a></li>
-          <li><a href="https://twitter.com/privacy" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">X/Twitter Privacy Policy</a></li>
-          <li><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">GitHub Privacy Statement</a></li>
+        <ul>
+          <li><a href="https://www.linkedin.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">LinkedIn Privacy Policy</a></li>
+          <li><a href="https://twitter.com/privacy" target="_blank" rel="noopener noreferrer">X/Twitter Privacy Policy</a></li>
+          <li><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub Privacy Statement</a></li>
         </ul>
       </section>
 
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold text-foreground mb-4">7. Your Rights under GDPR</h2>
-        <p class="text-muted-foreground mb-4">You have the following rights regarding your personal data:</p>
-        <ul class="list-disc list-inside text-muted-foreground space-y-2">
-          <li><strong class="text-foreground">Right of access (Art. 15 GDPR):</strong> You have the right to obtain information about your personal data processed by us</li>
-          <li><strong class="text-foreground">Right to rectification (Art. 16 GDPR):</strong> You have the right to have inaccurate personal data corrected</li>
-          <li><strong class="text-foreground">Right to erasure (Art. 17 GDPR):</strong> You have the right to have your personal data deleted</li>
-          <li><strong class="text-foreground">Right to restriction of processing (Art. 18 GDPR):</strong> You have the right to restrict the processing of your personal data</li>
-          <li><strong class="text-foreground">Right to data portability (Art. 20 GDPR):</strong> You have the right to receive your personal data in a structured, commonly used format</li>
-          <li><strong class="text-foreground">Right to object (Art. 21 GDPR):</strong> You have the right to object to the processing of your personal data</li>
-          <li><strong class="text-foreground">Right to withdraw consent (Art. 7 GDPR):</strong> If processing is based on consent, you can withdraw it at any time</li>
-          <li><strong class="text-foreground">Right to lodge a complaint (Art. 77 GDPR):</strong> You have the right to lodge a complaint with a supervisory authority</li>
+      <section>
+        <h2>7. Your Rights under GDPR</h2>
+        <p>You have the following rights regarding your personal data:</p>
+        <ul>
+          <li><strong>Right of access (Art. 15 GDPR):</strong> You have the right to obtain information about your personal data processed by us</li>
+          <li><strong>Right to rectification (Art. 16 GDPR):</strong> You have the right to have inaccurate personal data corrected</li>
+          <li><strong>Right to erasure (Art. 17 GDPR):</strong> You have the right to have your personal data deleted</li>
+          <li><strong>Right to restriction of processing (Art. 18 GDPR):</strong> You have the right to restrict the processing of your personal data</li>
+          <li><strong>Right to data portability (Art. 20 GDPR):</strong> You have the right to receive your personal data in a structured, commonly used format</li>
+          <li><strong>Right to object (Art. 21 GDPR):</strong> You have the right to object to the processing of your personal data</li>
+          <li><strong>Right to withdraw consent (Art. 7 GDPR):</strong> If processing is based on consent, you can withdraw it at any time</li>
+          <li><strong>Right to lodge a complaint (Art. 77 GDPR):</strong> You have the right to lodge a complaint with a supervisory authority</li>
         </ul>
         
-        <h3 class="text-xl font-semibold text-foreground mb-3 mt-6">How to Exercise Your Rights</h3>
-        <p class="text-muted-foreground">
-          To exercise any of these rights, please contact us at <a href="mailto:ozturkbatu@gmail.com" class="text-accent hover:underline">ozturkbatu@gmail.com</a>. 
+        <h3>How to Exercise Your Rights</h3>
+        <p>
+          To exercise any of these rights, please contact us at <a href="mailto:ozturkbatu@gmail.com">ozturkbatu@gmail.com</a>. 
           We will respond to your request within one month.
         </p>
       </section>
 
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold text-foreground mb-4">8. Data Security</h2>
-        <p class="text-muted-foreground mb-4">
+      <section>
+        <h2>8. Data Security</h2>
+        <p>
           We use appropriate technical and organizational security measures to protect your personal data against unauthorized access, alteration, 
           disclosure, or destruction. However, no method of transmission over the internet or electronic storage is 100% secure.
         </p>
-        <p class="text-muted-foreground">
+        <p>
           This website uses HTTPS encryption to protect data transmission. You can recognize this by the lock symbol in your browser's address bar.
         </p>
       </section>
 
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold text-foreground mb-4">9. Changes to This Privacy Policy</h2>
-        <p class="text-muted-foreground">
+      <section>
+        <h2>9. Changes to This Privacy Policy</h2>
+        <p>
           We may update this privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page 
           and updating the "Last Updated" date. You are advised to review this privacy policy periodically for any changes.
         </p>
-        <p class="text-muted-foreground mt-4">
-          <strong class="text-foreground">Last Updated:</strong> October 2026
+        <p>
+          <strong>Last Updated:</strong> October 2026
         </p>
       </section>
 
-      <section class="mb-8">
-        <h2 class="text-2xl font-semibold text-foreground mb-4">10. Contact</h2>
-        <p class="text-muted-foreground">
+      <section>
+        <h2>10. Contact</h2>
+        <p>
           If you have any questions about this privacy policy or our data processing practices, please contact us at:
         </p>
-        <div class="bg-card/30 rounded-lg p-4 mt-4">
-          <p class="text-muted-foreground">Email: <a href="mailto:ozturkbatu@gmail.com" class="text-accent hover:underline">ozturkbatu@gmail.com</a></p>
+        <div>
+          <p>Email: <a href="mailto:ozturkbatu@gmail.com">ozturkbatu@gmail.com</a></p>
         </div>
       </section>
     </div>
-  </div>
-</BaseLayout>
+  </div></main>
+  <script>import '../scripts/theme.js';</script>
+</StoryLayout>
 
