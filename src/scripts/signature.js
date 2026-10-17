@@ -37,6 +37,6 @@ export async function drawSignature(canvas, duration = 2.1) {
   render(0);
   const state = { p: 0 };
   return new Promise((resolve) => {
-    gsap.to(state, { p: 1, duration, ease: 'power1.inOut', onUpdate: () => render(state.p), onComplete: resolve });
+    gsap.to(state, { p: 1, duration, ease: 'none', onUpdate: () => render(state.p), onComplete: resolve });
   });
 }

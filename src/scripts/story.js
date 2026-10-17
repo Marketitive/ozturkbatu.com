@@ -35,7 +35,7 @@ if (pre) {
       };
       pre.addEventListener('click', hide);
       setTimeout(hide, 5000);
-      drawSignature(document.getElementById('sig-canvas'), 2.1)
+      drawSignature(document.getElementById('sig-canvas'), 2.6)
         .then(() => setTimeout(hide, 350))
         .catch(hide);
     });
